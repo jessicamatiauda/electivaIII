@@ -85,9 +85,7 @@
      * @param e the event from the click on the new item button
      * @return {boolean}
      */
-    function llamada(){
-        addTaskToList(task);
-    };
+    
     const addTask = (e) => {
         let newTaskInput = document.getElementById("new-task");
         let content = newTaskInput.value;
@@ -96,7 +94,9 @@
         e.preventDefault();
 
         let task = new Task(content);
-
+        function llamada(){
+            addTaskToList(task);
+        };
         // TODO ITEM 1: Llamar al API con el método POST para crear una nueva tarea.
         //  - Como parámetro `callbackSuccess` envía una función que llame al método `addTaskToList` enviando la
         //    variable `task` y limpia el valor del input#new-task.
