@@ -13,7 +13,7 @@
         PENDING: 'PENDIENTE',
         DONE: 'TERMINADO'
     };
-
+    var peticionHTTP;
     class Task {
         constructor(description) {
             this.id = null;
@@ -22,13 +22,16 @@
             this.date = new Date().toUTCString();
         }
     }
-
+    
     /**
      * This method is executed once the page have just been loaded and call the service to retrieve the
      * list of tasks
      */
-    document.onreadystatechange = () => {
-
+    
+    document.onreadystatechange = function() => {
+            if (this.readyState == 4 && this.status == 200){
+                myfunction(this);            //para asegurar que el servidor este listo
+            }
         // TODO ITEM 0: Llamar al API con el método GET para recuperar la lista de tareas existentes.
         //  - Como parámetro `callbackSuccess` envía la función `loadTasks`.
         //  - Como parámetro `callbackError` envía una función que llame al método `showError` enviando un mensaje de
@@ -36,7 +39,21 @@
         //  - La llamada debe ser asíncrona.
 
     };
-
+    function inicializar_XHR() {
+                    if (window.XMLHttpRequest)
+                        peticionHTTP = new XMLHttpRequest();
+                    else
+                        peticionHTTP = new ActiveXObject("Microsoft.XMLHTTP");
+                };
+    
+    function myfunction(){
+     peticionHTTP.open('POST','https://task-backend-fpuna.herokuapp.com/tasks/', true) ;
+     peticionHTTP.onerror = function () {
+                        alert('Un error ha ocurrido con la petición al servidor.');
+                };
+     peticionHTTP.send(null);   
+    };   
+    
     /**
      * This method displays an error on the page.
      * @param code the status code of the HTTP response.
