@@ -27,21 +27,22 @@
      * This method is executed once the page have just been loaded and call the service to retrieve the
      * list of tasks
      */
-    var json = {"key1": "value1", "key2": "key2"};
-    document.onreadystatechange = function() => {
-            if (this.readyState == 4 && this.status == 200){
-                Ajax.sendGetRequest(API_URL, json,JSON,loadTasks,showError,true);  //para asegurar que el servidor este listo
-            }
+    var cadena_json = {"key1": "value1", "key2": "key2"};
+    
         // TODO ITEM 0: Llamar al API con el método GET para recuperar la lista de tareas existentes.
         //  - Como parámetro `callbackSuccess` envía la función `loadTasks`.
         //  - Como parámetro `callbackError` envía una función que llame al método `showError` enviando un mensaje de
         //    error
         //  - La llamada debe ser asíncrona.
+    document.onreadystatechange = function() => {
+            if (this.readyState == 4 && this.status == 200){
+                Ajax.sendGetRequest(API_URL, cadena_json,JSON,loadTasks,showError,true);  //para asegurar que el servidor este listo
+            }
 
     };
     
         
-    function myfunction(){
+    /**function myfunction(){
      //peticionHTTP.open('POST','https://task-backend-fpuna.herokuapp.com/tasks/', true) ;
      peticionHTTP.onerror = function () {
                         alert('Un error ha ocurrido con la petición al servidor.');
@@ -49,7 +50,7 @@
         
      Ajax.sendPostRequest(API_URL, param, MediaFormat.JSON, (value) => f1(value), (code) => f2(code, 'La tarea no ha podido ser añadida.'), true);   
     
-    };   
+    };  */ 
     
     /**
      * This method displays an error on the page.
@@ -100,6 +101,8 @@
         //    error
         //  - La llamada debe ser asíncrona.
         //  - No te olvides de envíar el parámetro `task` para que se cree la tarea.
+        
+        Ajax.sendPostRequest(API_URL,param, JSON,addTaskToList(task),showError, true);
 
 
         return false;
