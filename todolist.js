@@ -85,6 +85,9 @@
      * @param e the event from the click on the new item button
      * @return {boolean}
      */
+    function llamada(){
+        addTaskToList(task);
+    };
     const addTask = (e) => {
         let newTaskInput = document.getElementById("new-task");
         let content = newTaskInput.value;
@@ -102,11 +105,12 @@
         //  - La llamada debe ser asíncrona.
         //  - No te olvides de envíar el parámetro `task` para que se cree la tarea.
         
-        Ajax.sendPostRequest(API_URL,param, JSON,addTaskToList(task),showError, true);
+        Ajax.sendPostRequest(API_URL,param, JSON,llamada(),showError, true);
 
 
         return false;
     };
+    
 
     /**
      * This procedure links the new task button the addTask method on the click event.
