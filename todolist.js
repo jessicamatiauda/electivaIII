@@ -47,11 +47,13 @@
                 };
     
     function myfunction(){
-     peticionHTTP.open('POST','https://task-backend-fpuna.herokuapp.com/tasks/', true) ;
+     //peticionHTTP.open('POST','https://task-backend-fpuna.herokuapp.com/tasks/', true) ;
      peticionHTTP.onerror = function () {
                         alert('Un error ha ocurrido con la petición al servidor.');
                 };
-     peticionHTTP.send(null);   
+        
+     Ajax.sendPostRequest(API_URL, param, MediaFormat.JSON, (value) => f1(value), (code) => f2(code, 'La tarea no ha podido ser añadida.'), true);   
+    
     };   
     
     /**
