@@ -106,7 +106,7 @@
         //  - No te olvides de envíar el parámetro `task` para que se cree la tarea.
         
         Ajax.sendPostRequest(API_URL,param, JSON,llamada(),showError, true);
-
+        newTaskInput.value='';
 
         return false;
     };
