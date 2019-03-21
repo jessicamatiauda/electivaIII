@@ -36,9 +36,8 @@
         //  - La llamada debe ser asíncrona.
     document.onreadystatechange = function() => {
             if (this.readyState == 4 && this.status == 200){
-              var param_1 = document.getElementById('new-task');
-                var cadena_json = {"key1": "param_1"};
-                Ajax.sendGetRequest(API_URL, cadena_json,JSON,loadTasks,showError,true);  //para asegurar que el servidor este listo
+              
+                Ajax.sendGetRequest(API_URL,JSON,loadTasks,showError,true);  //para asegurar que el servidor este listo
             }
 
     };
@@ -106,8 +105,10 @@
         //    error
         //  - La llamada debe ser asíncrona.
         //  - No te olvides de envíar el parámetro `task` para que se cree la tarea.
+        var param_1 = document.getElementById('new-task');
+                var cadena_json = {"key1": "param_1"};
         
-        Ajax.sendPostRequest(API_URL,param, JSON,llamada(),showError, true);
+        Ajax.sendPostRequest(API_URL,cadena_json, JSON,llamada(),showError, true);
         newTaskInput.value='';
 
         return false;
