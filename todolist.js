@@ -1,8 +1,8 @@
 /**
  *
  *
- * @author carpincho
- * @since 04/03/19.
+ * @author Jess
+ * @since 20/03/19.
  * @version 1.0
  */
 (() => {
@@ -141,7 +141,7 @@
             // - Una forma de hacerlo es remover directamente el archivo con el id `task-${task.id}` del DOM HTML
             // y luego llamar a la función `addTaskToList` que re-creara la tarea con el nuevo estado en el lugar correcto.
             // - No te olvides de llamar al API (método PUT) para modificar el estado de la tarea en el servidor.
-            var estado_actual= e.target.checked;
+            //var estado_actual= e.target.checked;
             
             
             
