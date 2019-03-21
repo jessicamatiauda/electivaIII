@@ -34,10 +34,13 @@
         //  - Como parámetro `callbackError` envía una función que llame al método `showError` enviando un mensaje de
         //    error
         //  - La llamada debe ser asíncrona.
+    function llamadaError(){
+        showError('error desconocido')
+    };
     document.onreadystatechange = function() => {
             if (this.readyState == 4 && this.status == 200){
               
-                Ajax.sendGetRequest(API_URL,JSON,loadTasks,showError,true);  //para asegurar que el servidor este listo
+                Ajax.sendGetRequest(API_URL,JSON,loadTasks,llamadaError,true);  
             }
 
     };
@@ -105,10 +108,10 @@
         //    error
         //  - La llamada debe ser asíncrona.
         //  - No te olvides de envíar el parámetro `task` para que se cree la tarea.
-        var param_1 = document.getElementById('new-task');
+        var param_1 = document.getElementById('new-task').value;
                 var cadena_json = {"key1": "param_1"};
         
-        Ajax.sendPostRequest(API_URL,cadena_json, JSON,llamada(),showError, true);
+        Ajax.sendPostRequest(API_URL,cadena_json, JSON,llamada,llamadaError, true);
         newTaskInput.value='';
 
         return false;
@@ -126,6 +129,7 @@
      * We associate a function to manipulate the DOM once the checkbox value is changed.
      * Change the task to the completed or incomplete list (according to the status)
      */
+    
     const addOnChangeEvent = (task) => {
         const checkBox = document.getElementById(`task-${task.id}`).querySelector('label > input');
         checkBox.onchange = (e) => {
@@ -204,10 +208,7 @@
         let buttonOK = document.createElement('button');
         buttonOK.innerText = 'OK';
         buttonOK.setAttribute('id', `ok-button-${currentTask.id}`);
-        buttonOK.onclick = () => {
-            currentTask.description = document.getElementById(`task-edit-${currentTask.id}`).value;
-
-            // TODO ITEM 2: llamar a la API con el método PUT cuando la descripción de la tarea es
+        // TODO ITEM 2: llamar a la API con el método PUT cuando la descripción de la tarea es
             //  modificada (`currentTask`).
             //  - Como parámetro `callbackSuccess` envía una función que llame al método `revertHTMLChangeOnEdit`
             //    enviando la variable `currentTask`.
@@ -215,8 +216,18 @@
             //    error
             //  - La llamada debe ser asíncrona.
             //  - No te olvides de envíar el parámetro para que se cree la tarea.
-        };
-
+        buttonOK.onclick = () => {
+            if (currentTask.description != (document.getElementById(`task-edit-${currentTask.id}`).value))
+                    currentTask.description = document.getElementById(`task-edit-${currentTask.id}`).value;
+                    var param_1 = document.getElementById('new-task').value;
+                    var cadena_json = {"key1": "param_1"};
+                    function llamada1(){
+                        revertHTMLChangeOnEdit(currentTask);
+                     };
+                    Ajax.sendPutRequest('https://task-backend-fpuna.herokuapp.com/tasks/1',cadena_json,json,llamada1,llamadaError,true);
+            else 
+                llamadaError();
+             };
         let buttonCancel = document.createElement('button');
         buttonCancel.innerText = 'Cancel';
         buttonCancel.setAttribute('id', `cancel-button-${currentTask.id}`);
