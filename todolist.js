@@ -39,7 +39,7 @@
     };
     document.onreadystatechange = function() => {
             if (this.readyState == 4 && this.status == 200){
-              
+                
                 Ajax.sendGetRequest(API_URL,JSON,loadTasks,llamadaError,true);  
             }
 
@@ -141,6 +141,11 @@
             // - Una forma de hacerlo es remover directamente el archivo con el id `task-${task.id}` del DOM HTML
             // y luego llamar a la función `addTaskToList` que re-creara la tarea con el nuevo estado en el lugar correcto.
             // - No te olvides de llamar al API (método PUT) para modificar el estado de la tarea en el servidor.
+            var estado_actual= e.target.checked;
+            
+            
+            
+            
         };
     };
 
@@ -273,6 +278,7 @@
      */
     const removeTaskFromList = (id) => {
         // TODO ITEM 4: remover del DOM HTML el elemento con id `task-${id}`
+        sendDeleteRequest('https://task-backend-fpuna.herokuapp.com/tasks/1',`task-${id}`,json,removeTask,llamadaError,true)
     };
 
     /**
