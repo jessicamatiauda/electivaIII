@@ -285,6 +285,9 @@
      * This method sends a DELETE request to remove the task from the server.
      * @param e
      */
+    function llamar(){
+        removeTaskFromList();
+    };
     const removeTask = (e) => {
         const id = e.target.dataset.id;
         // TODO ITEM 5: enviar una petición DELETE al API con el {id} de la tarea.
@@ -293,5 +296,6 @@
         //   - Como parámetro `callbackError` enviar una función que llame al método `showError` enviando
         //     un mensaje de error
         //   - La llamada debe ser asíncrona.
+        sendDeleteRequest('https://task-backend-fpuna.herokuapp.com/tasks/1',`task-${id}`,json,llamar,llamadaError,true)
     };
 })();
