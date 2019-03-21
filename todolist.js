@@ -27,7 +27,7 @@
      * This method is executed once the page have just been loaded and call the service to retrieve the
      * list of tasks
      */
-    var cadena_json = {"key1": "value1", "key2": "key2"};
+    
     
         // TODO ITEM 0: Llamar al API con el método GET para recuperar la lista de tareas existentes.
         //  - Como parámetro `callbackSuccess` envía la función `loadTasks`.
@@ -36,6 +36,8 @@
         //  - La llamada debe ser asíncrona.
     document.onreadystatechange = function() => {
             if (this.readyState == 4 && this.status == 200){
+              var param_1 = document.getElementById('new-task');
+                var cadena_json = {"key1": "param_1"};
                 Ajax.sendGetRequest(API_URL, cadena_json,JSON,loadTasks,showError,true);  //para asegurar que el servidor este listo
             }
 
